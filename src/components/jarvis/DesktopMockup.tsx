@@ -47,7 +47,7 @@ export function DesktopMockup() {
               <div className="text-[10px] text-white/50 mt-0.5">How can I help you today?</div>
               <div className="mt-2 flex items-end gap-0.5 h-8">
                 {Array.from({ length: 28 }).map((_, i) => (
-                  <span key={i} className="flex-1 rounded-sm bg-[oklch(0.88_0.24_155)]" style={{ height: `${20 + Math.abs(Math.sin(i)) * 80}%`, opacity: 0.5 + Math.random() * 0.5 }} />
+                  <span key={i} className="flex-1 rounded-sm bg-[oklch(0.88_0.24_155)]" style={{ height: `${20 + Math.abs(Math.sin(i)) * 80}%`, opacity: 0.5 + Math.abs(Math.cos(i * 1.7)) * 0.5 }} />)
                 ))}
               </div>
             </div>
