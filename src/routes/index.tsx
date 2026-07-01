@@ -121,7 +121,7 @@ function Home() {
             ].map(([Icon, title, desc], i) => (
               <div key={i} className="flex items-start gap-3">
                 <div className="w-12 h-12 rounded-xl bg-[oklch(0.88_0.24_155_/_0.1)] border border-[oklch(0.88_0.24_155_/_0.3)] flex items-center justify-center shrink-0">
-                  {/* @ts-expect-error dynamic icon */}
+                  
                   <Icon className="w-5 h-5 text-[oklch(0.88_0.24_155)]" />
                 </div>
                 <div>

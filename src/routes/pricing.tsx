@@ -101,7 +101,7 @@ function Pricing() {
             ].map(([Icon, t, d], i) => (
               <div key={i} className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-lg bg-[oklch(0.88_0.24_155_/_0.1)] border border-[oklch(0.88_0.24_155_/_0.3)] flex items-center justify-center shrink-0">
-                  {/* @ts-expect-error dynamic */}
+                  
                   <Icon className="w-4 h-4 text-[oklch(0.88_0.24_155)]" />
                 </div>
                 <div>
