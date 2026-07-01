@@ -3,6 +3,7 @@ import { Navbar } from "@/components/jarvis/Navbar";
 import { Footer } from "@/components/jarvis/Footer";
 import { BackgroundFX } from "@/components/jarvis/BackgroundFX";
 import { Apple, Download } from "lucide-react";
+import ogImage from "@/assets/og-jarvis.jpg.asset.json";
 
 export const Route = createFileRoute("/download")({
   head: () => ({
@@ -11,7 +12,11 @@ export const Route = createFileRoute("/download")({
       { name: "description", content: "Download JARVIS AI for Windows, macOS or Linux. Latest version 2.0.0. Fast install, lifetime updates." },
       { property: "og:title", content: "Download JARVIS AI" },
       { property: "og:description", content: "Available for all major platforms." },
+      { property: "og:url", content: "/download" },
+      { property: "og:image", content: ogImage.url },
+      { name: "twitter:image", content: ogImage.url },
     ],
+    links: [{ rel: "canonical", href: "/download" }],
   }),
   component: DownloadPage,
 });
