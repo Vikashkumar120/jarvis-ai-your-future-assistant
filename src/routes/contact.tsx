@@ -4,6 +4,7 @@ import { Footer } from "@/components/jarvis/Footer";
 import { BackgroundFX } from "@/components/jarvis/BackgroundFX";
 import { Mail, MessageCircle, Send, MapPin, Github, Twitter, Youtube } from "lucide-react";
 import { useState } from "react";
+import ogImage from "@/assets/og-jarvis.jpg.asset.json";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -12,7 +13,11 @@ export const Route = createFileRoute("/contact")({
       { name: "description", content: "Get in touch with the JARVIS AI team. Email, Discord, Telegram or GitHub. We reply within a few hours." },
       { property: "og:title", content: "Contact JARVIS AI" },
       { property: "og:description", content: "Support, sales and partnerships." },
+      { property: "og:url", content: "/contact" },
+      { property: "og:image", content: ogImage.url },
+      { name: "twitter:image", content: ogImage.url },
     ],
+    links: [{ rel: "canonical", href: "/contact" }],
   }),
   component: Contact,
 });

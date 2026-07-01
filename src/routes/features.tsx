@@ -5,6 +5,7 @@ import { BackgroundFX } from "@/components/jarvis/BackgroundFX";
 import { FeatureGrid } from "@/components/jarvis/FeatureGrid";
 import { DesktopMockup } from "@/components/jarvis/DesktopMockup";
 import { CheckCircle2 } from "lucide-react";
+import ogImage from "@/assets/og-jarvis.jpg.asset.json";
 
 export const Route = createFileRoute("/features")({
   head: () => ({
@@ -13,7 +14,11 @@ export const Route = createFileRoute("/features")({
       { name: "description", content: "Explore 25+ features of JARVIS AI: voice control, automation, code assistant, system monitor, screenshot AI, plugins and more." },
       { property: "og:title", content: "Features — JARVIS AI" },
       { property: "og:description", content: "Everything you need in a modern desktop AI assistant." },
+      { property: "og:url", content: "/features" },
+      { property: "og:image", content: ogImage.url },
+      { name: "twitter:image", content: ogImage.url },
     ],
+    links: [{ rel: "canonical", href: "/features" }],
   }),
   component: Features,
 });

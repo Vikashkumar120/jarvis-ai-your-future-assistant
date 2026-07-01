@@ -10,6 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import ogImage from "../assets/og-jarvis.jpg.asset.json";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -66,11 +67,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "theme-color", content: "#050505" },
       { title: "JARVIS AI — Next Generation Desktop AI Assistant" },
       { name: "description", content: "JARVIS AI is a premium desktop assistant for Windows, macOS and Linux. Voice control, automation, code assistant, and system intelligence in one futuristic app." },
       { name: "author", content: "JARVIS AI" },
-      { property: "og:title", content: "JARVIS AI — Next Generation Desktop AI Assistant" },
-      { property: "og:description", content: "Control your PC with voice, automate tasks, and supercharge productivity." },
+      { name: "keywords", content: "JARVIS AI, desktop AI assistant, voice assistant, AI automation, Windows AI, macOS AI, Linux AI, productivity assistant" },
+      { property: "og:site_name", content: "JARVIS AI" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@JarvisAI" },
@@ -82,6 +84,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "JARVIS AI",
+          url: "/",
+          logo: ogImage.url,
+          sameAs: ["https://twitter.com/JarvisAI", "https://github.com/jarvis-ai"],
+        }),
       },
     ],
   }),
