@@ -39,8 +39,8 @@ export function AIOrb({ size = 360 }: { size?: number }) {
           {Array.from({ length: 40 }).map((_, i) => {
             const angle = (i / 40) * Math.PI * 2;
             const r = 30 + (i % 5) * 3;
-            const cx = 50 + Math.cos(angle) * r;
-            const cy = 50 + Math.sin(angle) * r * 0.6;
+            const cx = Number((50 + Math.cos(angle) * r).toFixed(3));
+            const cy = Number((50 + Math.sin(angle) * r * 0.6).toFixed(3));
             return <circle key={i} cx={cx} cy={cy} r="0.6" fill="white" opacity={0.6 + (i % 3) * 0.15} />;
           })}
         </svg>

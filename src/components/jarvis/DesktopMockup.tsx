@@ -47,7 +47,7 @@ export function DesktopMockup() {
               <div className="text-[10px] text-white/50 mt-0.5">How can I help you today?</div>
               <div className="mt-2 flex items-end gap-0.5 h-8">
                 {Array.from({ length: 28 }).map((_, i) => (
-                  <span key={i} className="flex-1 rounded-sm bg-[oklch(0.88_0.24_155)]" style={{ height: `${20 + Math.abs(Math.sin(i)) * 80}%`, opacity: 0.5 + Math.abs(Math.cos(i * 1.7)) * 0.5 }} />
+                  <span key={i} className="flex-1 rounded-sm bg-[oklch(0.88_0.24_155)]" style={{ height: `${(20 + Math.abs(Math.sin(i)) * 80).toFixed(2)}%`, opacity: Number((0.5 + Math.abs(Math.cos(i * 1.7)) * 0.5).toFixed(3)) }} />
                 ))}
               </div>
             </div>
@@ -82,7 +82,7 @@ export function DesktopMockup() {
               <div className="text-center text-[10px] text-[oklch(0.88_0.24_155)] mb-1">Click to stop listening</div>
               <div className="flex items-end justify-center gap-0.5 h-6">
                 {Array.from({ length: 40 }).map((_, i) => (
-                  <span key={i} className="w-0.5 rounded-full bg-[oklch(0.88_0.24_155)]" style={{ height: `${20 + Math.abs(Math.sin(i * 0.6)) * 80}%` }} />
+                  <span key={i} className="w-0.5 rounded-full bg-[oklch(0.88_0.24_155)]" style={{ height: `${(20 + Math.abs(Math.sin(i * 0.6)) * 80).toFixed(2)}%` }} />
                 ))}
               </div>
             </div>
