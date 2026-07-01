@@ -3,6 +3,7 @@ import { Navbar } from "@/components/jarvis/Navbar";
 import { Footer } from "@/components/jarvis/Footer";
 import { BackgroundFX } from "@/components/jarvis/BackgroundFX";
 import { CheckCircle2, ShieldCheck, Infinity as InfinityIcon, RefreshCw, Lock, Headphones, Apple, Download } from "lucide-react";
+import ogImage from "@/assets/og-jarvis.jpg.asset.json";
 
 export const Route = createFileRoute("/pricing")({
   head: () => ({
@@ -11,6 +12,26 @@ export const Route = createFileRoute("/pricing")({
       { name: "description", content: "One license, lifetime access. Choose your platform: Windows ₹999, macOS ₹1,199, Linux ₹899. All future updates included." },
       { property: "og:title", content: "Pricing — JARVIS AI" },
       { property: "og:description", content: "Simple, transparent lifetime pricing across Windows, macOS and Linux." },
+      { property: "og:url", content: "/pricing" },
+      { property: "og:image", content: ogImage.url },
+      { name: "twitter:image", content: ogImage.url },
+    ],
+    links: [{ rel: "canonical", href: "/pricing" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: "JARVIS AI Desktop Assistant",
+          description: "Premium desktop AI assistant with lifetime licensing.",
+          offers: [
+            { "@type": "Offer", name: "Windows", price: "999", priceCurrency: "INR", availability: "https://schema.org/InStock" },
+            { "@type": "Offer", name: "macOS", price: "1199", priceCurrency: "INR", availability: "https://schema.org/InStock" },
+            { "@type": "Offer", name: "Linux", price: "899", priceCurrency: "INR", availability: "https://schema.org/InStock" },
+          ],
+        }),
+      },
     ],
   }),
   component: Pricing,
