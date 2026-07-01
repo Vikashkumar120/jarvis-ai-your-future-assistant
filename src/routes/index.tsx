@@ -7,6 +7,7 @@ import { BackgroundFX } from "@/components/jarvis/BackgroundFX";
 import { DesktopMockup } from "@/components/jarvis/DesktopMockup";
 import { PlatformCards } from "@/components/jarvis/PlatformCards";
 import { FeatureGrid } from "@/components/jarvis/FeatureGrid";
+import ogImage from "@/assets/og-jarvis.jpg.asset.json";
 import { useState } from "react";
 
 export const Route = createFileRoute("/")({
@@ -16,6 +17,36 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Control your PC with voice, automate tasks, manage files, write code, and experience a real human-like AI assistant. Windows, macOS and Linux." },
       { property: "og:title", content: "JARVIS AI — Next Generation Desktop AI Assistant" },
       { property: "og:description", content: "The most premium desktop AI assistant for Windows, macOS and Linux." },
+      { property: "og:url", content: "/" },
+      { property: "og:image", content: ogImage.url },
+      { name: "twitter:image", content: ogImage.url },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          name: "JARVIS AI",
+          operatingSystem: "Windows, macOS, Linux",
+          applicationCategory: "ProductivityApplication",
+          aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", ratingCount: "1200" },
+          offers: { "@type": "Offer", price: "899", priceCurrency: "INR" },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FAQS.map(([q, a]) => ({
+            "@type": "Question",
+            name: q,
+            acceptedAnswer: { "@type": "Answer", text: a },
+          })),
+        }),
+      },
     ],
   }),
   component: Home,
