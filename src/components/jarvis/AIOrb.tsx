@@ -46,21 +46,28 @@ export function AIOrb({ size = 360 }: { size?: number }) {
         </svg>
       </div>
 
-      {/* Floating particles */}
-      {Array.from({ length: 14 }).map((_, i) => (
-        <span
-          key={i}
-          className="absolute w-1 h-1 rounded-full bg-[oklch(0.88_0.24_155)]"
-          style={{
-            left: `${20 + Math.random() * 60}%`,
-            top: `${20 + Math.random() * 60}%`,
-            animation: `particle-drift ${4 + Math.random() * 4}s linear ${Math.random() * 3}s infinite`,
-            // @ts-expect-error css vars
-            "--dx": `${(Math.random() - 0.5) * 60}px`,
-            "--dy": `${-30 - Math.random() * 40}px`,
-          }}
-        />
-      ))}
+      {/* Floating particles - client-only to avoid SSR mismatch */}
+      {mounted && Array.from({ length: 14 }).map((_, i) => {
+        const left = 20 + ((i * 37) % 60);
+        const top = 20 + ((i * 23) % 60);
+        const dur = 4 + ((i * 5) % 40) / 10;
+        const delay = ((i * 7) % 30) / 10;
+        const dx = ((i % 5) - 2) * 12;
+        const dy = -30 - ((i * 3) % 40);
+        return (
+          <span
+            key={i}
+            className="absolute w-1 h-1 rounded-full bg-[oklch(0.88_0.24_155)]"
+            style={{
+              left: `${left}%`,
+              top: `${top}%`,
+              animation: `particle-drift ${dur}s linear ${delay}s infinite`,
+              ["--dx" as string]: `${dx}px`,
+              ["--dy" as string]: `${dy}px`,
+            } as React.CSSProperties}
+          />
+        );
+      })}
     </div>
   );
 }
