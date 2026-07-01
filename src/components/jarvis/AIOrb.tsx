@@ -1,4 +1,8 @@
+import { useEffect, useState } from "react";
+
 export function AIOrb({ size = 360 }: { size?: number }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   return (
     <div
       className="relative flex items-center justify-center"
