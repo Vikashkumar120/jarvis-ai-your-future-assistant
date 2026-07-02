@@ -426,16 +426,21 @@ function AdminPage() {
                           </span>
                         </div>
                       </div>
-                      {r.public_url && (
-                        <a
-                          href={r.public_url}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="text-xs text-[oklch(0.88_0.24_155)] hover:underline"
-                        >
-                          Link
-                        </a>
-                      )}
+                      <button
+                        onClick={async () => {
+                          const { data, error } = await supabase.storage
+                            .from(BUCKET)
+                            .createSignedUrl(r.storage_path, 60 * 10);
+                          if (error || !data?.signedUrl) {
+                            toast.error("Could not create download link");
+                            return;
+                          }
+                          window.open(data.signedUrl, "_blank");
+                        }}
+                        className="text-xs text-[oklch(0.88_0.24_155)] hover:underline px-2"
+                      >
+                        Download
+                      </button>
                       <button
                         onClick={() => deleteRelease(r)}
                         className="w-8 h-8 rounded-lg hover:bg-red-500/15 text-red-400 flex items-center justify-center"
