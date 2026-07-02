@@ -141,16 +141,13 @@ function AdminPage() {
 
     xhr.onload = async () => {
       if (xhr.status >= 200 && xhr.status < 300) {
-        const { data: pub } = supabase.storage
-          .from(BUCKET)
-          .getPublicUrl(objectPath);
         const { error: insertErr } = await supabase.from("app_releases").insert({
           name: file.name,
           version: version || null,
           platform: platform || null,
           size_bytes: file.size,
           storage_path: objectPath,
-          public_url: pub.publicUrl,
+          public_url: null,
           notes: notes || null,
         });
         if (insertErr) {
