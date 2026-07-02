@@ -33,15 +33,18 @@ function AuthPage() {
     try {
       const result = await lovable.auth.signInWithOAuth("google", {
         redirect_uri: window.location.origin + "/auth",
+        extraParams: { prompt: "select_account" },
       });
       if (result.error) {
-        toast.error("Sign-in failed. Please try again.");
+        console.error("OAuth error:", result.error);
+        toast.error("Sign-in failed. If you're inside the editor preview, open the app in a new tab and try again.");
         setLoading(false);
         return;
       }
       if (result.redirected) return;
       navigate({ to: "/admin", replace: true });
     } catch (e) {
+      console.error(e);
       toast.error("Something went wrong signing in.");
       setLoading(false);
     }
