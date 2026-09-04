@@ -78,6 +78,29 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-3">
+          {signedIn ? (
+            <>
+              <Link
+                to="/admin"
+                className="hidden md:inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-white/85 hover:text-[oklch(0.88_0.24_155)] hover:bg-white/5"
+              >
+                <ShieldCheck className="w-4 h-4" /> Admin
+              </Link>
+              <button
+                onClick={signOut}
+                className="hidden md:inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-white/70 hover:text-white hover:bg-white/5"
+              >
+                <LogOut className="w-4 h-4" /> Sign out
+              </button>
+            </>
+          ) : (
+            <Link
+              to="/auth"
+              className="hidden md:inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-white/85 hover:text-[oklch(0.88_0.24_155)] hover:bg-white/5"
+            >
+              <LogIn className="w-4 h-4" /> Sign in
+            </Link>
+          )}
           <Link to="/pricing" className="hidden md:inline-flex btn-ghost-neon btn-ghost-neon-hover items-center gap-2 !py-2.5 !px-4">
             <ShoppingCart className="w-4 h-4" />
             <span className="text-sm font-semibold">BUY NOW</span>
