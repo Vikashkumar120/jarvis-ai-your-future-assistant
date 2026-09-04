@@ -1,6 +1,7 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ShoppingCart, Menu, X, Waves } from "lucide-react";
+import { ShoppingCart, Menu, X, Waves, LogIn, LogOut, ShieldCheck } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const NAV = [
   { label: "Home", to: "/" },
@@ -16,6 +17,8 @@ const NAV = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [signedIn, setSignedIn] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -23,6 +26,20 @@ export function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => setSignedIn(!!data.session));
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
+      setSignedIn(!!session);
+    });
+    return () => sub.subscription.unsubscribe();
+  }, []);
+
+  const signOut = async () => {
+    await supabase.auth.signOut();
+    setOpen(false);
+    navigate({ to: "/auth", replace: true });
+  };
 
   return (
     <header
@@ -61,6 +78,29 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-3">
+          {signedIn ? (
+            <>
+              <Link
+                to="/admin"
+                className="hidden md:inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-white/85 hover:text-[oklch(0.88_0.24_155)] hover:bg-white/5"
+              >
+                <ShieldCheck className="w-4 h-4" /> Admin
+              </Link>
+              <button
+                onClick={signOut}
+                className="hidden md:inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-white/70 hover:text-white hover:bg-white/5"
+              >
+                <LogOut className="w-4 h-4" /> Sign out
+              </button>
+            </>
+          ) : (
+            <Link
+              to="/auth"
+              className="hidden md:inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-white/85 hover:text-[oklch(0.88_0.24_155)] hover:bg-white/5"
+            >
+              <LogIn className="w-4 h-4" /> Sign in
+            </Link>
+          )}
           <Link to="/pricing" className="hidden md:inline-flex btn-ghost-neon btn-ghost-neon-hover items-center gap-2 !py-2.5 !px-4">
             <ShoppingCart className="w-4 h-4" />
             <span className="text-sm font-semibold">BUY NOW</span>
@@ -86,6 +126,33 @@ export function Navbar() {
               <Link key={item.label} to={item.to} className={cls} onClick={() => setOpen(false)}>{item.label}</Link>
             );
           })}
+          <div className="mt-2 pt-2 border-t border-white/10 flex flex-col gap-1">
+            {signedIn ? (
+              <>
+                <Link
+                  to="/admin"
+                  onClick={() => setOpen(false)}
+                  className="px-4 py-3 text-sm text-white/85 hover:text-[oklch(0.88_0.24_155)] rounded-lg hover:bg-white/5 inline-flex items-center gap-2"
+                >
+                  <ShieldCheck className="w-4 h-4" /> Admin
+                </Link>
+                <button
+                  onClick={signOut}
+                  className="px-4 py-3 text-sm text-white/70 hover:text-white rounded-lg hover:bg-white/5 inline-flex items-center gap-2 text-left"
+                >
+                  <LogOut className="w-4 h-4" /> Sign out
+                </button>
+              </>
+            ) : (
+              <Link
+                to="/auth"
+                onClick={() => setOpen(false)}
+                className="px-4 py-3 text-sm text-white/85 hover:text-[oklch(0.88_0.24_155)] rounded-lg hover:bg-white/5 inline-flex items-center gap-2"
+              >
+                <LogIn className="w-4 h-4" /> Sign in
+              </Link>
+            )}
+          </div>
         </div>
       )}
     </header>
