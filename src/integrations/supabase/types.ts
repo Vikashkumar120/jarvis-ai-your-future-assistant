@@ -17,37 +17,43 @@ export type Database = {
       app_releases: {
         Row: {
           created_at: string
+          download_url: string | null
           id: string
           name: string
           notes: string | null
           platform: string | null
           public_url: string | null
           size_bytes: number
-          storage_path: string
+          size_label: string | null
+          storage_path: string | null
           uploaded_by: string | null
           version: string | null
         }
         Insert: {
           created_at?: string
+          download_url?: string | null
           id?: string
           name: string
           notes?: string | null
           platform?: string | null
           public_url?: string | null
           size_bytes?: number
-          storage_path: string
+          size_label?: string | null
+          storage_path?: string | null
           uploaded_by?: string | null
           version?: string | null
         }
         Update: {
           created_at?: string
+          download_url?: string | null
           id?: string
           name?: string
           notes?: string | null
           platform?: string | null
           public_url?: string | null
           size_bytes?: number
-          storage_path?: string
+          size_label?: string | null
+          storage_path?: string | null
           uploaded_by?: string | null
           version?: string | null
         }
