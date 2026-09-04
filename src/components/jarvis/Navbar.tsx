@@ -126,6 +126,33 @@ export function Navbar() {
               <Link key={item.label} to={item.to} className={cls} onClick={() => setOpen(false)}>{item.label}</Link>
             );
           })}
+          <div className="mt-2 pt-2 border-t border-white/10 flex flex-col gap-1">
+            {signedIn ? (
+              <>
+                <Link
+                  to="/admin"
+                  onClick={() => setOpen(false)}
+                  className="px-4 py-3 text-sm text-white/85 hover:text-[oklch(0.88_0.24_155)] rounded-lg hover:bg-white/5 inline-flex items-center gap-2"
+                >
+                  <ShieldCheck className="w-4 h-4" /> Admin
+                </Link>
+                <button
+                  onClick={signOut}
+                  className="px-4 py-3 text-sm text-white/70 hover:text-white rounded-lg hover:bg-white/5 inline-flex items-center gap-2 text-left"
+                >
+                  <LogOut className="w-4 h-4" /> Sign out
+                </button>
+              </>
+            ) : (
+              <Link
+                to="/auth"
+                onClick={() => setOpen(false)}
+                className="px-4 py-3 text-sm text-white/85 hover:text-[oklch(0.88_0.24_155)] rounded-lg hover:bg-white/5 inline-flex items-center gap-2"
+              >
+                <LogIn className="w-4 h-4" /> Sign in
+              </Link>
+            )}
+          </div>
         </div>
       )}
     </header>
