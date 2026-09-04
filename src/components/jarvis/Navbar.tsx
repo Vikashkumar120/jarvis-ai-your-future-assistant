@@ -1,6 +1,7 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ShoppingCart, Menu, X, Waves } from "lucide-react";
+import { ShoppingCart, Menu, X, Waves, LogIn, LogOut, ShieldCheck } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const NAV = [
   { label: "Home", to: "/" },
